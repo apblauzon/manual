@@ -2,8 +2,11 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 
+
 # Load the dataset
 df = pd.read_csv('aggregation_data.csv')
+
+
 
 def show_line_chart():
     st.header("Line Chart")

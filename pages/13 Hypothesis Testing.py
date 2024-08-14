@@ -53,8 +53,8 @@ def show_hypothesis_testing():
     # Perform t-test
     t_stat, p_value = stats.ttest_ind(before_campaign, after_campaign)
     
-    st.write("T-Statistic:", t_stat)
-    st.write("P-Value:", p_value)
+    st.write(f"T-Statistic: {t_stat:.4f}")
+    st.write(f"P-Value: {p_value:.4f}")
     
     if p_value < 0.05:
         st.write("There is a significant difference in average sales before and after the marketing campaign.")
@@ -71,8 +71,8 @@ def show_hypothesis_testing():
     # Perform t-test
     t_stat_cat, p_value_cat = stats.ttest_ind(category_1, category_2)
     
-    st.write("T-Statistic for Product Categories:", t_stat_cat)
-    st.write("P-Value for Product Categories:", p_value_cat)
+    st.write(f"T-Statistic for Product Categories: {t_stat_cat:.4f}")
+    st.write(f"P-Value for Product Categories: {p_value_cat:.4f}")
     
     if p_value_cat < 0.05:
         st.write("There is a significant difference in revenue between the two product categories.")
