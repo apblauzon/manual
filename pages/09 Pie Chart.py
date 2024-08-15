@@ -18,6 +18,11 @@ def show_pie_chart():
                              title='Sales Distribution by Region',
                              color_discrete_sequence=px.colors.sequential.Plasma)
     st.plotly_chart(fig_sales_region)
+    
+    st.write("")
+    st.write("")
+
+
 
     # Pie Chart of Profit by Region
     st.subheader("Generate Pie Chart of Profit by Region.")

@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 from scipy.stats import chi2_contingency
+import scipy.stats as stats
 import plotly.express as px
 
 # Generate or load the dataset
@@ -39,29 +40,35 @@ def show_categorical_test():
     """)
 
     # Load the dataset
-    df = pd.read_csv('categorical_data.csv')
+    df = pd.read_csv('aggregation_data.csv')
 
+    
     # Cross-tabulation between 'Region' and 'Product_Category'
-    st.subheader("Generate Cross Tabulation: Region vs. Product Category")
-    cross_tab = pd.crosstab(df['Region'], df['Product_Category'])
-    st.write(cross_tab)
+    st.subheader("Conduct chi-square test between Region and Marketing Channels. ")
+    marketing_channels = ['TV', 'Social Media', 'Email', 'Advertisement Billboards', 'Radio', 'Print Media', 'Online Ads', 'Influencer Marketing', 'Direct Mail', 'Event Sponsorship']
+    df['Marketing Channels'] = np.random.choice(marketing_channels, size=len(df))
+    df.to_csv('updated_aggregation_data.csv', index=False)
+    contingency_table = pd.crosstab(df['Region'], df['Marketing Channels'])
+    chi2, p, dof, expected = stats.chi2_contingency(contingency_table)
+    st.write("Chi-Square Test Results")
+    st.write(f"Chi-Square statistic: {chi2}")
+    st.write(f"p-value: {p}")
+    st.write(f"Degrees of freedom: {dof}")
+    st.write("Expected frequencies:")
+    st.dataframe(pd.DataFrame(expected, index=contingency_table.index, columns=contingency_table.columns), use_container_width=True)
+      
+    st.write("")
+    st.write("")
     
-    # Chi-Square Test
-    st.subheader("Conduct Chi-Square Test between Region and Cateogory")
-    st.write("Output:")
-    chi2, p, dof, ex = chi2_contingency(cross_tab)
-    
-    st.write(f"Chi-Square Statistic: {chi2}")
-    st.write(f"P-Value: {p}")
+    st.subheader("Conduct chi-square test between Marketing Campaign and Marketing Channels. ")
+    contingency_table = pd.crosstab(df['Marketing_Campaign'], df['Marketing Channels'])
+    chi2, p, dof, ex = stats.chi2_contingency(contingency_table)
+    st.write(f"Chi-square Test Statistic: {chi2}")
+    st.write(f"P-value: {p}")
     st.write(f"Degrees of Freedom: {dof}")
-    st.write("Expected Frequencies Table:")
-    st.write(pd.DataFrame(ex, index=cross_tab.index, columns=cross_tab.columns))
+    fig = px.imshow(contingency_table, text_auto=True, aspect="auto")
+    fig.update_layout(title="Contingency Table: Marketing Campaign vs Marketing Channels", annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
+    st.plotly_chart(fig, use_container_width=True)
 
-    # Interpretation
-    if p < 0.05:
-        st.write("The result is significant at p < 0.05, suggesting a significant association between Region and Product Category.")
-    else:
-        st.write("The result is not significant at p < 0.05, suggesting no significant association between Region and Product Category.")
 
-# Display the categorical test results
 show_categorical_test()

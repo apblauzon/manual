@@ -61,6 +61,10 @@ def show_hypothesis_testing():
     else:
         st.write("There is no significant difference in average sales before and after the marketing campaign.")
 
+
+    st.write("")
+    st.write("")
+    
     # Example 2: Determine if there is a significant difference in Revenue between two product categories
     st.subheader("Determine if There is a Significant Difference in Revenue Between Two Product Categories")
     st.write("Output:")

@@ -17,15 +17,15 @@ def show_heat_map():
     """)
 
     # Heat Map of Correlation Matrix
-    st.subheader("Generate Heat Map of Correlation Matrix.")
-    numeric_df = df.select_dtypes(include='number')  # Select only numeric columns
-    corr_matrix = numeric_df.corr()  # Compute correlation matrix
-    fig_corr_heatmap = px.imshow(corr_matrix, 
-                                text_auto=True, 
-                                title='Correlation Matrix Heat Map',
-                                labels=dict(color='Correlation Coefficient'),
-                                color_continuous_scale='YlGnBu')  # Choose color scale
-    st.plotly_chart(fig_corr_heatmap)
+    st.subheader("Generate correlation matrix of all numerical value except Year, Latitude and Longitude. ")
+    numerical_cols = df.select_dtypes(include=['number']).drop(columns=['Year', 'Latitude', 'Longitude'])
+    correlation_matrix = numerical_cols.corr()
+    fig = px.imshow(correlation_matrix, text_auto=True, aspect='auto', title='Correlation Matrix of Selected Numerical Columns')
+    fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.write("")
+    st.write("")
 
     # Heat Map of Sales by Region and Month
     st.subheader("Generate Heat Map of Sales by Region and Month.")

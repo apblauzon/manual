@@ -20,9 +20,14 @@ def show_scatterplot():
     """)
 
     # Scatter Plot: Profit vs Discount Percentage
-    st.subheader("Scatter Plot: Profit vs Discount Percentage")
-    fig_profit_discount = px.scatter(df, x='Discount Percentage', y='Profit', title='Profit vs Discount Percentage')
-    st.plotly_chart(fig_profit_discount)
+    st.subheader("Generate scatterplot by monthly saves versus monthly order. ")
+    df['Month_Year'] = df['Month'] + ' ' + df['Year'].astype(str)
+    monthly_data = df.groupby('Month_Year').agg({'Sales': 'sum', 'Orders': 'sum'}).reset_index()
+    fig = px.scatter(monthly_data, x='Sales', y='Orders', title='Monthly Sales vs Monthly Orders', labels={'Sales': 'Monthly Sales', 'Orders': 'Monthly Orders'}, hover_data=['Month_Year'])
+    fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
+    st.plotly_chart(fig, use_container_width=True)
+    st.write("")
+    st.write("")
 
     # Scatter Plot: Quantity Sold vs Customer Lifetime Value
     st.subheader("Scatter Plot: Quantity Sold vs Customer Lifetime Value")

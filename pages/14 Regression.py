@@ -6,6 +6,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 import plotly.express as px
+import statsmodels.api as sm
 
 # Load and update the dataset
 df = pd.read_csv('aggregation_data.csv')
@@ -25,40 +26,32 @@ def show_regression():
 
     # Polynomial Regression: Predict Profit based on Discount Percentage
     st.subheader("Polynomial Regression: Predict Profit Based on Discount Percentage")
-    
-    X_profit = df[['Discount Percentage']]
-    y_profit = df['Profit']
-    
-    # Create polynomial features
-    poly = PolynomialFeatures(degree=2)
-    X_poly_profit = poly.fit_transform(X_profit)
-    
-    # Split the data into training and testing sets
-    X_train_profit, X_test_profit, y_train_profit, y_test_profit = train_test_split(X_poly_profit, y_profit, test_size=0.2, random_state=42)
-    
-    # Create and fit the model
-    poly_model_profit = LinearRegression()
-    poly_model_profit.fit(X_train_profit, y_train_profit)
-    
-    # Predict and evaluate the model
-    y_pred_profit = poly_model_profit.predict(X_test_profit)
-    mse_profit = mean_squared_error(y_test_profit, y_pred_profit)
-    
-    st.write(f"Mean Squared Error: {mse_profit:.2f}")
-    st.write(f"Coefficients: {poly_model_profit.coef_}")
-    st.write(f"Intercept: {poly_model_profit.intercept_:.2f}")
-    
-    # Plotting the polynomial regression line
-    df_sorted = df.sort_values('Discount Percentage')
-    X_sorted = df_sorted[['Discount Percentage']]
-    X_poly_sorted = poly.transform(X_sorted)
-    y_pred_sorted = poly_model_profit.predict(X_poly_sorted)
-    
-    fig_profit = px.scatter(df, x='Discount Percentage', y='Profit', trendline='ols',
-                           title='Polynomial Regression of Profit vs. Discount Percentage')
-    fig_profit.add_scatter(x=df_sorted['Discount Percentage'], y=y_pred_sorted, mode='lines', name='Polynomial fit')
-    st.plotly_chart(fig_profit)
+    monthly_data = df.groupby(['Year', 'Month'])[['Sales', 'Orders']].sum().reset_index()
+    monthly_data['Month'] = pd.Categorical(monthly_data['Month'], ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], ordered=True)
+    monthly_data = monthly_data.sort_values(['Year', 'Month'])
 
+    X = monthly_data['Orders']
+    y = monthly_data['Sales']
+    X = sm.add_constant(X)
+    model = sm.OLS(y, X).fit()
+    predictions = model.predict(X)
+
+    p_values = model.pvalues
+    equation = f"y = {model.params[0]:.2f} + {model.params[1]:.2f}x"
+    is_significant = p_values[1] < 0.05
+
+    fig = px.scatter(monthly_data, x='Orders', y='Sales', trendline="ols", title="Monthly Sales vs. Monthly Orders")
+    fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8')),
+                                    dict(x=0.7, y=0.1, xref='paper', yref='paper', xanchor='left', yanchor='bottom', text=equation, showarrow=False, font=dict(color='black'))])
+
+    st.write(f"The regression equation is: {equation}")
+    st.write(f"Is the relationship statistically significant? {'Yes' if is_significant else 'No'}")
+    st.plotly_chart(fig, use_container_width=True)
+
+
+    st.write("")
+    st.write("")
+    
     # Polynomial Regression: Predict Customer Lifetime Value based on Quantity Sold
     st.subheader("Polynomial Regression: Predict Customer Lifetime Value Based on Quantity Sold")
     

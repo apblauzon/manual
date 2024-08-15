@@ -12,34 +12,23 @@ def show_geomapping():
     """)
 
     # Filter data for top 20 highest profit
-    st.subheader("Generate Geomap with Top 20 Highest Profit.")
-    top_20_profit = df.nlargest(20, 'Revenue')  # Changed from 'Sales' to 'Revenue' for profit
-    fig_top_profit = px.scatter_geo(top_20_profit, lat='Latitude', lon='Longitude', size='Revenue', 
-                                    color='Sales',  # Color by Sales
-                                    color_continuous_scale='YlOrRd',  # Yellow to Red color scale
-                                    projection='natural earth', 
-                                    title='Top 20 Highest Profit',
-                                    labels={'Revenue': 'Profit Amount', 'Sales': 'Sales Amount'},
-                                    size_max=10,  # Adjust bubble size
-                                    opacity=0.6,  # Adjust bubble opacity
-                                    )
-    fig_top_profit.update_geos(fitbounds="locations")  # Fit map to data locations
-    st.plotly_chart(fig_top_profit)
+    st.subheader("Generate geomapping based of number of orders. Group by Marketing Campaign. ")
+    df_clean = df.dropna(subset=['Latitude', 'Longitude'])
+    grouped_data = df_clean.groupby(['Marketing_Campaign', 'Latitude', 'Longitude'], as_index=False)['Orders'].sum()
+    fig = px.scatter_mapbox(grouped_data, lat="Latitude", lon="Longitude", size="Orders", color="Marketing_Campaign", mapbox_style="open-street-map", title="Geographical Distribution of Orders by Marketing Campaign", zoom=12, opacity=0.6)
+    fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.write("")
+    st.write("")
 
     # Filter data for Region = East
-    st.subheader("Generate Geomap with Sales in Region = East.")
-    df_east = df[df['Region'] == 'East']
-    fig_east = px.scatter_geo(df_east, lat='Latitude', lon='Longitude', size='Sales', 
-                             color='Sales', 
-                             color_continuous_scale='YlOrRd',  # Yellow to Red color scale
-                             projection='natural earth', 
-                             title='Sales Distribution in East Region',
-                             labels={'Sales': 'Sales Amount'},
-                             size_max=10,  # Adjust bubble size
-                             opacity=0.6,  # Adjust bubble opacity
-                             )
-    fig_east.update_geos(fitbounds="locations")  # Fit map to data locations
-    st.plotly_chart(fig_east)
+    st.subheader("Generate geomapping based of number of sales.")
+    df_clean = df.dropna(subset=['Latitude', 'Longitude'])
+    fig = px.scatter_mapbox(df_clean, lat='Latitude', lon='Longitude', size='Sales', color='Sales', color_continuous_scale=px.colors.sequential.YlOrBr, zoom=12, mapbox_style='open-street-map', title="Sales Geomap")
+    fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
+    st.plotly_chart(fig, use_container_width=True)
+
 
 # Display the geomaps
 show_geomapping()
