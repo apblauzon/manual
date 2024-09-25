@@ -19,15 +19,15 @@ def show_geomapping():
     fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
     st.plotly_chart(fig, use_container_width=True)
 
-    st.write("")
-    st.write("")
+    # st.write("")
+    # st.write("")
 
-    # Filter data for Region = East
-    st.subheader("Generate geomapping based of number of sales.")
-    df_clean = df.dropna(subset=['Latitude', 'Longitude'])
-    fig = px.scatter_mapbox(df_clean, lat='Latitude', lon='Longitude', size='Sales', color='Sales', color_continuous_scale=px.colors.sequential.YlOrBr, zoom=12, mapbox_style='open-street-map', title="Sales Geomap")
-    fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
-    st.plotly_chart(fig, use_container_width=True)
+    # # Filter data for Region = East
+    # st.subheader("Generate geomapping based of number of sales.")
+    # df_clean = df.dropna(subset=['Latitude', 'Longitude'])
+    # fig = px.scatter_mapbox(df_clean, lat='Latitude', lon='Longitude', size='Sales', color='Sales', color_continuous_scale=px.colors.sequential.YlOrBr, zoom=12, mapbox_style='open-street-map', title="Sales Geomap")
+    # fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
+    # st.plotly_chart(fig, use_container_width=True)
 
 
 # Display the geomaps

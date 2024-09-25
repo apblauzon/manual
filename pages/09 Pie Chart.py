@@ -19,19 +19,19 @@ def show_pie_chart():
                              color_discrete_sequence=px.colors.sequential.Plasma)
     st.plotly_chart(fig_sales_region)
     
-    st.write("")
-    st.write("")
+    # st.write("")
+    # st.write("")
 
 
 
-    # Pie Chart of Profit by Region
-    st.subheader("Generate Pie Chart of Profit by Region.")
-    profit_by_region = df.groupby('Region')['Revenue'].sum().reset_index()  # Assuming 'Revenue' represents profit
-    fig_profit = px.pie(profit_by_region, names='Region', values='Revenue', 
-                        title='Profit Distribution by Region',
-                        labels={'Revenue': 'Total Profit'},
-                        color_discrete_sequence=['blue', 'lightblue', 'lightyellow', 'yellow'])  # Custom blue to yellow color palette
-    st.plotly_chart(fig_profit)
+    # # Pie Chart of Profit by Region
+    # st.subheader("Generate Pie Chart of Profit by Region.")
+    # profit_by_region = df.groupby('Region')['Revenue'].sum().reset_index()  # Assuming 'Revenue' represents profit
+    # fig_profit = px.pie(profit_by_region, names='Region', values='Revenue', 
+    #                     title='Profit Distribution by Region',
+    #                     labels={'Revenue': 'Total Profit'},
+    #                     color_discrete_sequence=['blue', 'lightblue', 'lightyellow', 'yellow'])  # Custom blue to yellow color palette
+    # st.plotly_chart(fig_profit)
 
 # Display the pie charts
 show_pie_chart()

@@ -26,13 +26,13 @@ def show_scatterplot():
     fig = px.scatter(monthly_data, x='Sales', y='Orders', title='Monthly Sales vs Monthly Orders', labels={'Sales': 'Monthly Sales', 'Orders': 'Monthly Orders'}, hover_data=['Month_Year'])
     fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
     st.plotly_chart(fig, use_container_width=True)
-    st.write("")
-    st.write("")
+    # st.write("")
+    # st.write("")
 
-    # Scatter Plot: Quantity Sold vs Customer Lifetime Value
-    st.subheader("Scatter Plot: Quantity Sold vs Customer Lifetime Value")
-    fig_qty_clv = px.scatter(df, x='Quantity Sold', y='Customer Lifetime Value', title='Quantity Sold vs Customer Lifetime Value', color_discrete_sequence=['orange'])
-    st.plotly_chart(fig_qty_clv)
+    # # Scatter Plot: Quantity Sold vs Customer Lifetime Value
+    # st.subheader("Scatter Plot: Quantity Sold vs Customer Lifetime Value")
+    # fig_qty_clv = px.scatter(df, x='Quantity Sold', y='Customer Lifetime Value', title='Quantity Sold vs Customer Lifetime Value', color_discrete_sequence=['orange'])
+    # st.plotly_chart(fig_qty_clv)
 
 # Display the scatter plots
 show_scatterplot()

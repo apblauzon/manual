@@ -19,16 +19,16 @@ def show_histogram():
                                        nbins=30)  # Number of bins
     st.plotly_chart(fig_sales_histogram)
 
-    st.write("")
-    st.write("")
+    # st.write("")
+    # st.write("")
     
-    # Histogram of Revenue by Year
-    st.subheader("Generate Histogram of Revenue by Year.")
-    fig_revenue_histogram = px.histogram(df, x='Revenue', color='Year',
-                                         title='Histogram of Revenue by Year',
-                                         labels={'Revenue': 'Revenue Amount'},
-                                         nbins=30)  # Number of bins
-    st.plotly_chart(fig_revenue_histogram)
+    # # Histogram of Revenue by Year
+    # st.subheader("Generate Histogram of Revenue by Year.")
+    # fig_revenue_histogram = px.histogram(df, x='Revenue', color='Year',
+    #                                      title='Histogram of Revenue by Year',
+    #                                      labels={'Revenue': 'Revenue Amount'},
+    #                                      nbins=30)  # Number of bins
+    # st.plotly_chart(fig_revenue_histogram)
 
 # Display the histograms
 show_histogram()

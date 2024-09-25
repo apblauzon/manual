@@ -4,7 +4,7 @@ import streamlit as st
 def show_uploading_data():
     st.header("Uploading Your Data File")
     st.markdown("""
-    1. **Ensure Your Data is Clean**: Remove missing values, typographical errors, and superfluous characters. Address outliers if necessary.
+    1. **Ensure Your Data is Clean**: Remove missing values, typographical errors, and superfluous characters. Address outliers outside of DatViz AI, if necessary, then re-upload your data.
     2. **Use Only One Header**: Your data should have a single, clear header.
     3. **Column and Row Organization**: Columns represent variables, and rows represent observations.
     4. **Name Columns Properly**: Use short, meaningful names for each column.

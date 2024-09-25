@@ -13,7 +13,7 @@ df['Customer Lifetime Value'] = 10000 / df['Quantity Sold']
 df.to_csv('updated_aggregation_data.csv', index=False)
 
 def show_correlation_matrix():
-    st.header("Correlation Matrix")
+    st.header("Correlation Matrix / Heatmap")
     st.markdown("""
     A correlation matrix is useful for understanding the relationships between multiple variables. It shows how strongly pairs of variables are related, which can help in identifying patterns and dependencies in your data.
     """)

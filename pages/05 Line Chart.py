@@ -25,15 +25,15 @@ def show_line_chart():
     sales_over_month = df.groupby('Date')['Sales'].sum().reset_index()
     fig_sales = px.line(sales_over_month, x='Date', y='Sales')
     st.plotly_chart(fig_sales)
-    st.write("")
-    st.write("")
-    # Line Chart of Profit by Quarter
-    st.subheader("Generate Line Chart of Profit by Quarter.")
-    # Create a 'Quarter' column for grouping
-    df['Quarter'] = pd.to_datetime(df['Date']).dt.to_period('Q').astype(str)
-    profit_by_quarter = df.groupby('Quarter')['Sales'].sum().reset_index()
-    fig_profit = px.line(profit_by_quarter, x='Quarter', y='Sales')
-    st.plotly_chart(fig_profit)
+    # st.write("")
+    # st.write("")
+    # # Line Chart of Profit by Quarter
+    # st.subheader("Generate Line Chart of Profit by Quarter.")
+    # # Create a 'Quarter' column for grouping
+    # df['Quarter'] = pd.to_datetime(df['Date']).dt.to_period('Q').astype(str)
+    # profit_by_quarter = df.groupby('Quarter')['Sales'].sum().reset_index()
+    # fig_profit = px.line(profit_by_quarter, x='Quarter', y='Sales')
+    # st.plotly_chart(fig_profit)
 
 # Display the charts
 show_line_chart()
