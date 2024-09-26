@@ -33,7 +33,7 @@ t_stat, p_value = ttest_ind(quantity_yes, quantity_no)
 def show_hypothesis_testing():
     st.title("Hypothesis Testing")
     st.markdown("""
-    A hypothesis test helps evaluate if a sales strategy works by analyzing a small sample of customer interactions to determine if there’s enough evidence to support the claim.
+   A hypothesis test helps evaluate if a sales strategy e.g. Marketing Promotion works by analyzing a small sample of sales transactions to determine if there’s enough evidence to support a claim that Marketing Promo improves sales.
     """)
     
     st.write("**T-test on  influence of Marketing Promotion on Quantity of Sales**")
