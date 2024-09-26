@@ -10,11 +10,22 @@ import plotly.express as px
 import statsmodels.api as sm
 from scipy.stats import chi2_contingency
 import scipy.stats as stats
+from scipy.stats import ttest_ind
 
-
-df = pd.read_csv('new_data.csv')
+df = pd.read_csv('retail_marketing.csv')
 # Perform the t-test
-t_stat, p_val = stats.ttest_1samp(df['TotalAmount'].dropna(), popmean=0)
+
+
+# Filtering data and dropping missing values in 'Quantity' and 'MarketingPromotion'
+df_filtered = df[['Quantity', 'MarketingPromotion']].dropna()
+
+# Separating data based on 'MarketingPromotion'
+quantity_yes = df_filtered[df_filtered['MarketingPromotion'] == 'Yes']['Quantity']
+quantity_no = df_filtered[df_filtered['MarketingPromotion'] == 'No']['Quantity']
+
+# Performing T-test
+t_stat, p_value = ttest_ind(quantity_yes, quantity_no)
+
 
 
 
@@ -24,15 +35,23 @@ def show_hypothesis_testing():
     st.markdown("""
     A hypothesis test helps evaluate if a sales strategy works by analyzing a small sample of customer interactions to determine if there’s enough evidence to support the claim.
     """)
+    
+    st.write("**T-test on  influence of Marketing Promotion on Quantity of Sales**")
+# Displaying the results
+    st.write(f'T-statistic: {t_stat}')
+    st.write(f'P-value: {p_value}')
 
-    # Display the results
-    st.write(f'T-test Statistic: {t_stat:.4f}')
-    st.write(f'p-value: {p_val:.4f}')
-
-    if p_val < 0.05:
-        st.write('Conclusion: The test is significant, we reject the null hypothesis.')
+    # Drawing conclusion
+    if p_value < 0.05:
+        st.write("There is a statistically significant influence of Marketing Promotion on the quantity of sales.")
     else:
-        st.write('Conclusion: The test is not significant, we fail to reject the null hypothesis.')
+        st.write("There is no statistically significant influence of Marketing Promotion on the quantity of sales.")
+
+    # Box plot to visualize the influence of Marketing Promotion on Quantity of sales
+    fig = px.box(df_filtered, x='MarketingPromotion', y='Quantity', title='Influence of Marketing Promotion on Quantity of Sales')
+    fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
+    st.plotly_chart(fig, use_container_width=True)
+
     
 # Display the hypothesis testing results
 show_hypothesis_testing()
