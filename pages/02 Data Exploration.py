@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+df = pd.read_csv('new_data.csv')
 
 def show_prompting():
     st.header("Data Exploration")
@@ -16,5 +18,17 @@ def show_prompting():
     - You may also ask DatViz AI for the meaning of some statistical concepts you want to use in your data, e.g., std, mean, max, etc.
     - With DatViz AI, you can do hypothesis testing, e.g., Test the hypothesis that variable X1 is correlated with X2.
     """)
+
+    type_mapping = df.dtypes.astype(str).map(lambda x: 'Numerical' if x in ['int64', 'float64'] else 'Character')
+    missing_values = df.isna().sum()
+
+    # Combine type information and missing values into a DataFrame
+    info_df = pd.DataFrame({'Data Type': type_mapping, 'Missing Values': missing_values}).reset_index()
+    info_df.columns = ['Variable', 'Data Type', 'Missing Values']
+    
+    st.write("")
+    st.write("**Variables with their data types and number of missing values**")
+    # Display the DataFrame in Streamlit
+    st.dataframe(info_df, use_container_width=True)
 
 show_prompting()

@@ -8,7 +8,7 @@ df = pd.read_csv('new_data.csv')
 def show_bar_chart():
     st.header("Bar Chart")
     st.markdown("""
-    Bar charts are useful for comparing quantities across different categories. You can use them to visualize sales, revenue, and other metrics by various segments such as regions or years.
+    Bar charts are useful for comparing quantities across different categories.
     """)
 
     # Bar Chart of Sales by Region

@@ -9,7 +9,7 @@ df = df.dropna(subset=['Quantity', 'ProductCategory'])
 def show_box_plot():
     st.subheader("Box Plot (Box and Whiskers)")
     st.markdown("""
-    Box plots are useful for showing the distribution of data and identifying outliers. They are helpful for comparing distributions across different categories, such as sales or revenue by region or month.
+    Box plots are useful for showing the distribution of data and identifying outliers. They are helpful for comparing distributions across different categories, by such as quantity (or sales) by Product ID (or Product Category). 
     """)
 
 

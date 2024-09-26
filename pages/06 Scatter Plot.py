@@ -20,23 +20,7 @@ def show_scatterplot():
     Scatter plots are useful for visualizing the relationship between two variables. You can use them to see how one metric might influence another.
     """)
 
-    fig = px.scatter(monthly_data, x='Quantity', y='TotalAmount', title='Monthly Total Amount vs. Quantity', labels={'Quantity': 'Total Quantity', 'TotalAmount': 'Total Amount'}, trendline='ols', trendline_color_override='darkblue')
-    fig.update_layout(
-    template='simple_white',
-    title={
-        'y':0.9,
-        'x':0.5,
-        'xanchor': 'center',
-        'yanchor': 'top'},
-    xaxis=dict(
-        title='Total Quantity',
-        titlefont_size=14),
-    yaxis=dict(
-        title='Total Amount',
-        titlefont_size=14)
-)
-    fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
-    st.plotly_chart(fig, use_container_width=True)
+
     
     avg_price = df.groupby('TransactionDate')['Price'].mean().reset_index()
     total_amount = df.groupby('TransactionDate')['TotalAmount'].sum().reset_index()

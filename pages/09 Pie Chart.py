@@ -8,7 +8,7 @@ df = pd.read_csv('new_data.csv')
 def show_pie_chart():
     st.subheader("Pie Chart")
     st.markdown("""
-    Pie charts are useful for showing the proportion of different categories in a whole. They are ideal for visualizing how different segments contribute to a total, such as quantity or profit distribution.
+    Pie charts are useful for showing the proportion of different categories in a whole. They are ideal for visualizing how different segments contribute to a total, such as quantity by Product ID (category).
     """)
 
     quantity_distribution = df.groupby('ProductID')['Quantity'].sum().reset_index()

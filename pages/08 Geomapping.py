@@ -8,7 +8,7 @@ df_clean = df.dropna(subset=['lon', 'lat'])
 def show_geomapping():
     st.header("Geomapping")
     st.markdown("""
-    Geomapping is useful for visualizing data spatially on maps. You can use geomaps to see how different metrics are distributed across geographical locations, such as sales or profit by city or region.
+    Geomapping is useful for visualizing data spatially on maps. You can use geomaps to see how different metrics are distributed across geographical locations.
     """)
 
 

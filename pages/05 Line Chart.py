@@ -24,7 +24,7 @@ monthly_mean['Month'] = monthly_mean['Month'].astype(str)
 def show_line_chart():
     st.header("Line Chart")
     st.markdown("""
-    Line charts are useful for showing trends over time. You can use them to visualize how metrics such as sales or profit change across different time periods, such as over months, quarters, or years.
+    Line charts are useful for showing trends over time.
     """)
 
     # Plotly line chart
