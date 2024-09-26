@@ -3,7 +3,7 @@ import plotly.express as px
 import pandas as pd
 
 # Load the dataset
-df = pd.read_csv('aggregation_data.csv')
+df = pd.read_csv('new_data.csv')
 
 def show_histogram():
     st.subheader("Histogram")
@@ -11,24 +11,11 @@ def show_histogram():
     Histograms are useful for visualizing the distribution of a single quantitative variable. They show how often different ranges of values occur, which helps in understanding data distribution and frequency.
     """)
 
-    # Histogram of Sales
-    st.subheader("Generate Histogram of Sales.")
-    fig_sales_histogram = px.histogram(df, x='Sales',
-                                       title='Histogram of Sales',
-                                       labels={'Sales': 'Sales Amount'},
-                                       nbins=30)  # Number of bins
-    st.plotly_chart(fig_sales_histogram)
 
-    # st.write("")
-    # st.write("")
-    
-    # # Histogram of Revenue by Year
-    # st.subheader("Generate Histogram of Revenue by Year.")
-    # fig_revenue_histogram = px.histogram(df, x='Revenue', color='Year',
-    #                                      title='Histogram of Revenue by Year',
-    #                                      labels={'Revenue': 'Revenue Amount'},
-    #                                      nbins=30)  # Number of bins
-    # st.plotly_chart(fig_revenue_histogram)
+    fig = px.histogram(df, x='TotalAmount', nbins=30, title='Histogram of Total Amount', labels={'TotalAmount': 'Total Amount'})
+    fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
+
+    st.plotly_chart(fig, use_container_width=True)
 
 # Display the histograms
 show_histogram()

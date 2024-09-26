@@ -3,13 +3,14 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 # Load the dataset
-df = pd.read_csv('aggregation_data.csv')
-np.random.seed(42)
-df['Discount Percentage'] = np.random.uniform(5, 50, len(df))
-df['Profit'] = df['Discount Percentage'] * 1000
-df['Quantity Sold'] = np.random.randint(1, 100, len(df))
-df['Customer Lifetime Value'] = 10000 / df['Quantity Sold']
-df.to_csv('updated_aggregation_data.csv', index=False)
+
+df = pd.read_csv('new_data.csv')
+
+df['TransactionDate'] = pd.to_datetime(df['TransactionDate'], format='%d/%m/%Y')
+df['MonthYear'] = df['TransactionDate'].dt.to_period('M')
+monthly_data = df.groupby('MonthYear').agg({'Quantity': 'sum', 'TotalAmount': 'sum'}).reset_index()
+
+
 
 
 
@@ -19,20 +20,48 @@ def show_scatterplot():
     Scatter plots are useful for visualizing the relationship between two variables. You can use them to see how one metric might influence another.
     """)
 
-    # Scatter Plot: Profit vs Discount Percentage
-    st.subheader("Generate scatterplot by monthly saves versus monthly order. ")
-    df['Month_Year'] = df['Month'] + ' ' + df['Year'].astype(str)
-    monthly_data = df.groupby('Month_Year').agg({'Sales': 'sum', 'Orders': 'sum'}).reset_index()
-    fig = px.scatter(monthly_data, x='Sales', y='Orders', title='Monthly Sales vs Monthly Orders', labels={'Sales': 'Monthly Sales', 'Orders': 'Monthly Orders'}, hover_data=['Month_Year'])
+    fig = px.scatter(monthly_data, x='Quantity', y='TotalAmount', title='Monthly Total Amount vs. Quantity', labels={'Quantity': 'Total Quantity', 'TotalAmount': 'Total Amount'}, trendline='ols', trendline_color_override='darkblue')
+    fig.update_layout(
+    template='simple_white',
+    title={
+        'y':0.9,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'},
+    xaxis=dict(
+        title='Total Quantity',
+        titlefont_size=14),
+    yaxis=dict(
+        title='Total Amount',
+        titlefont_size=14)
+)
     fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
     st.plotly_chart(fig, use_container_width=True)
-    # st.write("")
-    # st.write("")
+    
+    avg_price = df.groupby('TransactionDate')['Price'].mean().reset_index()
+    total_amount = df.groupby('TransactionDate')['TotalAmount'].sum().reset_index()
+    merged_df = pd.merge(avg_price, total_amount, on='TransactionDate')
 
-    # # Scatter Plot: Quantity Sold vs Customer Lifetime Value
-    # st.subheader("Scatter Plot: Quantity Sold vs Customer Lifetime Value")
-    # fig_qty_clv = px.scatter(df, x='Quantity Sold', y='Customer Lifetime Value', title='Quantity Sold vs Customer Lifetime Value', color_discrete_sequence=['orange'])
-    # st.plotly_chart(fig_qty_clv)
+    fig = px.scatter(merged_df, x='Price', y='TotalAmount', title='Scatterplot of Average Price vs Total Amount',
+                    labels={
+                        'Price': 'Average Price',
+                        'TotalAmount': 'Total Amount'
+                    })
+    fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
 
+    st.plotly_chart(fig, use_container_width=True)   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 # Display the scatter plots
 show_scatterplot()
