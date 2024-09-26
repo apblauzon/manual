@@ -20,8 +20,7 @@ monthly_data = df.groupby('MonthYear').agg({'Quantity': 'sum', 'TotalAmount': 's
 
 # Streamlit app
 def show_hypothesis_testing():
-    st.title("Statistics Test")
-    st.header("Linear Regression")
+    st.header("Regression Modelling")
     st.markdown("""
     Regression analysis is a statistical technique used to understand the relationship between a dependent variable and one or more independent variables. It helps in predicting outcomes and identifying significant predictors. Common types of regression include linear regression, multiple regression, and logistic regression.
     """)
