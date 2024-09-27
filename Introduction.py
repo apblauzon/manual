@@ -2,10 +2,11 @@ import streamlit as st
 
 def show_intro():
     # Display the image
+    
     st.image("head_logo.svg", use_column_width=True)
-
+    st.header("Users Guide for Prompting")
+    st.write("")
     # Display the header and text
-    st.header("Introduction")
     st.markdown("""
     **Welcome to DatViz AI**, a data analytics application powered by OpenAI model ChatGPT4o. Using natural conversation, you can ask DatViz AI to simplify or summarize your data, calculate summary statistics, and generate clear and intuitive visualizations. It can be used in any field requiring quick data analysis and visualization.  DatViz Ai can also be integrated into decision-making and planning processes in business, government, not-for-profit, education and research institutions.
     
