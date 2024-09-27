@@ -1,5 +1,6 @@
 import streamlit as st
 
+st.set_page_config(page_title="DatViz Ai | User Guide", page_icon="logo.svg")
 def show_intro():
     # Display the image
     
