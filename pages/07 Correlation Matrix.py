@@ -29,7 +29,8 @@ def show_correlation_matrix():
     fig.update_layout(
         annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))]
     )
-
+    st.write("")
+    st.write("**PROMPT: Generate correlation matrix of all numerical variables except customer id, long and lat.**")
     st.plotly_chart(fig, use_container_width=True)
 
 # Display the correlation matrix

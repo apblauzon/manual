@@ -25,7 +25,8 @@ def show_geomapping():
     fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom',
                                         text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
 
-    # Display the Plotly chart
+    st.write("")
+    st.write("**PROMPT: Generate geomapping based on totalAmount.**")
     st.plotly_chart(fig, use_container_width=True)
 
 # Display the geomaps

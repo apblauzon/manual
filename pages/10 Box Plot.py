@@ -15,7 +15,8 @@ def show_box_plot():
 
     fig = px.box(df, x='ProductCategory', y='Quantity', title="Boxplot of Quantity by Product Category")
     fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
-
+    st.write("")
+    st.write("**PROMPT: Generate box plots of Quantity by Product Category.**")
     st.plotly_chart(fig, use_container_width=True)
 
 

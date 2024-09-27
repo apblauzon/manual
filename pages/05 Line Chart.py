@@ -31,6 +31,8 @@ def show_line_chart():
     fig = px.line(monthly_mean, x='Month', y='TotalAmount', title='Mean Total Amount by Transaction Date in Months (Excluding Years 2025, 2026, 2027)')
     fig.update_layout(xaxis_title='Month', yaxis_title='Mean Total Amount', annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
 
+    st.write("")
+    st.write("**PROMPT: Generate a line chart of Mean Total Amount by TransactionDate in months, exclude 2025,2026 and 2027.**")
     st.plotly_chart(fig, use_container_width=True)
 
 # Display the charts

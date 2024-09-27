@@ -32,7 +32,8 @@ def show_scatterplot():
                         'TotalAmount': 'Total Amount'
                     })
     fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
-
+    st.write("")
+    st.write("**PROMPT: Generate a scatterplot of average price and total amount.**")
     st.plotly_chart(fig, use_container_width=True)   
     
     

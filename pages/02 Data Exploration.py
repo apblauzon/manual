@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 df = pd.read_csv('new_data.csv')
+df2 = pd.read_csv('retail_marketing.csv')
 
 def show_prompting():
     st.header("Data Exploration")
@@ -27,8 +28,13 @@ def show_prompting():
     info_df.columns = ['Variable', 'Data Type', 'Missing Values']
     
     st.write("")
-    st.write("**Variables with their data types and number of missing values**")
+    st.write("**PROMPT: Generate a table to display the variables with their data types and number of missing values.**")
     # Display the DataFrame in Streamlit
     st.dataframe(info_df, use_container_width=True)
+    
+    st.write("")
+    st.write("**PROMPT: Generate a table to display the descriptive statistics of Quantity, Price, Discount Applied and Total Amount.**")
+    summary_stats = df2.iloc[:, 3:].describe()
+    st.dataframe(summary_stats, use_container_width=True)
 
 show_prompting()

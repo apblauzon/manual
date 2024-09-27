@@ -50,6 +50,8 @@ def show_hypothesis_testing():
 )
     fig.update_layout(annotations=[dict(x=0.99, y=1, xref='paper', yref='paper', xanchor='right', yanchor='bottom', text='Source: DatViz Ai', showarrow=False, font=dict(color='#073DC8'))])
     st.write("")
+    st.write("**PROMPT: Generate a linear regression with the monthly total amount as the dependent variable, and the monthly quantity and average monthly price as independent variables. Display the regression equation and a one-dimensional graph.**")
+    st.write("")
     st.write(f"**Regression Equation:** {regression_equation}")
     st.write("")
     st.plotly_chart(fig, use_container_width=True)

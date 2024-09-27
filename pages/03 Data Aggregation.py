@@ -17,7 +17,7 @@ def show_aggregations():
     Aggregation involves summarizing data by combining multiple records into a single value based on a specified criterion. It helps in analyzing data at different levels, such as by region, month, or year, and is commonly used for reporting and deriving insights from large datasets.
     """)
     st.write("")
-    st.write("**Total Amount of Sales every month**")
+    st.write("**PROMPT: Generate a table to display the Total Amount of Sales every month.**")
     # Display the table
     st.dataframe(monthly_total, use_container_width=True)
 # Display the aggregations
