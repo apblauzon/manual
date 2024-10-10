@@ -14,5 +14,8 @@ def show_intro():
     To use DatViz AI effectively, you should be familiar with your data, understand the context in which it was collected, and have some basic understanding of statistics. It is also important to have clear goals for analyzing your data.
     """)
 
+    st.write("")
+    st.write("Source of data of this demo: Retail_Transaction_Dataset.csv (from Kaggle) but with mocked-up locations")
+
 show_intro()
 
