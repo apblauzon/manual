@@ -10,7 +10,7 @@ def show_uploading_data():
     3. **Column and Row Organization**: Columns represent variables, and rows represent observations.
     4. **Name Columns Properly**: Use short, meaningful names for each column.
     5. **Column Name Sensitivity**: DatViz AI is not strictly column name and character sensitive, but it is advisable to use the exact names from your header.
-    6. **Geomapping Columns**: Ensure Latitude (Lat) and Longitude (Lon) columns are present. Subscribers can use our R-Shiny app "Geolo" to calculate these from addresses.
+    6. **Geomapping Columns**: Ensure Latitude (Lat) and Longitude (Lon) columns are present.
     """)
 
 show_uploading_data()
