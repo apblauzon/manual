@@ -76,7 +76,6 @@ def show_hypothesis_testing():
     # Prediction probabilities
     diabetes['Probability'] = model.predict_proba(scaler.transform(diabetes[['Glucose']]))[:, 1]
     st.write("**PROMPT: Generate logistic regression with outcome as dependent variable and glucose as independent variable.**")
-    
     # Ensure the 'Probability' column is in the DataFrame
     if 'Probability' in diabetes.columns:
         # Plot
@@ -89,6 +88,8 @@ def show_hypothesis_testing():
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.error("Probability column not found in the DataFrame.")
+    st.text("Note: Using diabetes.csv (from Kaggle)")
+    st.write("")
 # Display the hypothesis testing results
 show_hypothesis_testing()
 
