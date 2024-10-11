@@ -15,7 +15,8 @@ def show_intro():
     """)
 
     st.write("")
-    st.write("Source of data of this demo: Retail_Transaction_Dataset.csv (from Kaggle) but with mocked-up locations and added a column "Marketing Promotions" ")
+    st.write('Source of data of this demo: Retail_Transaction_Dataset.csv (from Kaggle) but with mocked-up locations and added a column "Marketing Promotions" ')
+
 
 show_intro()
 
