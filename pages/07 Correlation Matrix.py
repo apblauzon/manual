@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 # Load the dataset
+st.set_page_config(page_title="DatViz Ai | Correlation Matrix", page_icon="logo.svg")
 df = pd.read_csv('new_data.csv')
 
 

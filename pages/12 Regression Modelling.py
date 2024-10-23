@@ -10,7 +10,7 @@ import plotly.express as px
 import statsmodels.api as sm
 from scipy.stats import chi2_contingency
 
-
+st.set_page_config(page_title="DatViz Ai | Regression Modelling", page_icon="logo.svg")
 df = pd.read_csv('new_data.csv')
 df['TransactionDate'] = pd.to_datetime(df['TransactionDate'], format='%d/%m/%Y')
 df['MonthYear'] = df['TransactionDate'].dt.to_period('M')
@@ -92,3 +92,4 @@ def show_hypothesis_testing():
     st.write("")
 # Display the hypothesis testing results
 show_hypothesis_testing()
+

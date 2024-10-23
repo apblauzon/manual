@@ -3,7 +3,7 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 # Load the dataset
-
+st.set_page_config(page_title="DatViz Ai | Scatter Plot", page_icon="logo.svg")
 df = pd.read_csv('new_data.csv')
 
 df['TransactionDate'] = pd.to_datetime(df['TransactionDate'], format='%d/%m/%Y')

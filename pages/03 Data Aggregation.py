@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+st.set_page_config(page_title="DatViz Ai | Data Aggregation", page_icon="logo.svg")
 # Load the dataset
 df = pd.read_csv('new_data.csv')
 # Convert 'TransactionDate' to datetime format

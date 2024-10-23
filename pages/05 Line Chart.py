@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 
-
+st.set_page_config(page_title="DatViz Ai | Line Chart", page_icon="logo.svg")
 # Load the dataset
 df = pd.read_csv('new_data.csv')
 

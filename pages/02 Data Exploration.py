@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 df = pd.read_csv('new_data.csv')
 df2 = pd.read_csv('retail_marketing.csv')
-
+st.set_page_config(page_title="DatViz Ai | Data Exploration", page_icon="logo.svg")
 def show_prompting():
     st.header("Data Exploration")
     st.markdown("""
