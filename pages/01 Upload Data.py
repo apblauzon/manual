@@ -6,7 +6,7 @@ st.set_page_config(page_title="DatViz Ai | Upload Data", page_icon="logo.svg")
 def show_uploading_data():
     st.header("Uploading Your Data File")
     st.markdown("""
-    1. First and foremost, if you have **sensitive information** in your dataset, we  suggest either deleting that column or using some ID that will camouflage the data, but stilll make sense to your data visualization and analysis. 
+    1. First and foremost, if you have **sensitive information** in your dataset, we  suggest either deleting that column or using some record ID that will camouflage the data, but stilll make sense to your data visualization and analysis. 
     2. **Ensure Your Data is Clean**: Remove missing values, typographical errors, and superfluous characters. Address outliers outside of DatViz AI, if necessary, then re-upload your data.
     3. **Use Only One Header**: Your data should have a single, clear header.
     4. **Column and Row Organization**: Columns represent variables, and rows represent observations.
