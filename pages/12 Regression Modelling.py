@@ -92,4 +92,3 @@ def show_hypothesis_testing():
     st.write("")
 # Display the hypothesis testing results
 show_hypothesis_testing()
-
