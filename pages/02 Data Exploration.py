@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-df = pd.read_csv('new_data.csv')
-df2 = pd.read_csv('retail_marketing.csv')
+df = pd.read_csv('retail_marketing_2.csv')
+df2 = pd.read_csv('retail_marketing_2.csv')
 st.set_page_config(page_title="DatViz Ai | Data Exploration", page_icon="logo.svg")
 def show_prompting():
     st.header("Data Exploration")
@@ -33,8 +33,9 @@ def show_prompting():
     st.dataframe(info_df, use_container_width=True)
     
     st.write("")
-    st.write("**PROMPT: Generate a table to display the descriptive statistics of Quantity, Price, Discount Applied and Total Amount.**")
-    summary_stats = df2.iloc[:, 3:].describe()
+    st.write("**PROMPT: Generate a table to display the descriptive statistics of Quantity, Price, Discount Applied and Amount.**")
+    df_filtered = df2.drop(columns=['lon', 'lat'], errors='ignore')
+    summary_stats = df_filtered.describe()
     st.dataframe(summary_stats, use_container_width=True)
 
 show_prompting()

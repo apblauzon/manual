@@ -5,7 +5,7 @@ import numpy as np
 import plotly.express as px
 # Load the dataset
 st.set_page_config(page_title="DatViz Ai | Correlation Matrix", page_icon="logo.svg")
-df = pd.read_csv('new_data.csv')
+df = pd.read_csv('retail_marketing_2.csv')
 
 
 def show_correlation_matrix():
@@ -15,7 +15,7 @@ def show_correlation_matrix():
     """)
 
    # Calculate correlation matrix for numerical variables excluding 'lat', 'lon' and 'CustomerID'
-    corr_matrix = df[['Quantity', 'Price', 'DiscountApplied', 'TotalAmount']].corr()
+    corr_matrix = df[['Quantity', 'Price', 'DiscountApplied', 'Amount']].corr()
 
     # Create a heatmap using Plotly
     fig = px.imshow(
